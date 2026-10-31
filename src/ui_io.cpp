@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include "headers.h"
 #include "curses.h"
+#ifdef __EPOC32__
+#include "epoccons.h"
+#endif
 
 static bool curses_on = false;
 
@@ -74,7 +77,9 @@ void terminalRestore() {
 
     // exit curses
     endwin();
+#ifndef __EPOC32__
     (void) fflush(stdout);
+#endif
 
     curses_on = false;
 }
@@ -93,7 +98,13 @@ ssize_t terminalBellSound() {
 
     // The player can turn off beeps if they find them annoying.
     if (config::options::error_beep_sound) {
+#ifdef __EPOC32__
+        // writing to stdout would open estlib's text console over the game
+        econ_beep();
+        return 1;
+#else
         return write(1, "\007", 1);
+#endif
     }
 
     return 0;

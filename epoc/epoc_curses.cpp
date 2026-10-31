@@ -54,6 +54,18 @@ WINDOW *initscr(void)
 
 int endwin(void) { refresh(); return OK; }
 
+// Fatal message (replaces printf to a console that EPOC does not have)
+void epocShowFatal(const char *msg)
+{
+    if (!opened) return;
+    clear();
+    mvaddstr(0, 0, "Umoria stopped:");
+    mvaddstr(2, 0, msg ? msg : "");
+    mvaddstr(4, 0, "[Press any key]");
+    refresh();
+    econ_getkey(1);
+}
+
 WINDOW *newwin(int, int, int, int)
 {
     if (extra_used >= 4) return 0;

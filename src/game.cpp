@@ -326,13 +326,21 @@ void exitProgram() {
     exit(0);
 }
 
+#ifdef __EPOC32__
+void epocShowFatal(const char *msg);
+#endif
+
 // Abort the program with a message displayed on the terminal.
 void abortProgram(const char *msg) {
     flushInputBuffer();
     terminalRestore();
 
+#ifdef __EPOC32__
+    epocShowFatal(msg); // no console on EPOC: show it in the game window
+#else
     printf("Program was manually aborted with the message:\n");
     printf("%s\n", msg);
+#endif
 
     exit(0);
 }
