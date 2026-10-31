@@ -1,0 +1,9 @@
+TARGET		@NAME@.app
+TARGETTYPE	app
+UID		0x1000006c @UID@
+PROJECT		exelaunch
+SUBPROJECT	src
+SOURCE		exelaunch.cpp
+RESOURCE	@NAME@.rss
+SYSTEMINCLUDE	\epoc32\include
+LIBRARY		euser.lib apparc.lib cone.lib eikon.lib

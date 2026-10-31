@@ -1,0 +1,7 @@
+// Minimal resource file for the exe launcher (the app framework requires one)
+NAME LNCH
+#include <eikdef.rh>
+
+RESOURCE RSS_SIGNATURE { }
+RESOURCE TBUF { buf=""; }
+RESOURCE EIK_APP_INFO { }

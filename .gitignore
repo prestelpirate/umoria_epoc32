@@ -6,3 +6,7 @@ group/*.marm
 group/cxxflags.local.sed
 *.zip
 trace.txt
+launcher/dist/
+launcher/group/*.marm
+launcher/group/umoria.mmp
+launcher/src/umoria.rss
