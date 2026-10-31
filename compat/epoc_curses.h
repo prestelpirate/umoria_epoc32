@@ -8,6 +8,7 @@
 
 typedef struct {
     char c[CURS_MAXROWS][CURS_MAXCOLS];
+    unsigned char a[CURS_MAXROWS][CURS_MAXCOLS];  /* colour index per cell */
     unsigned char dirty[CURS_MAXROWS];
     int y, x;
 } WINDOW;
@@ -43,4 +44,13 @@ int mvcur(int oy, int ox, int ny, int nx);
 #define curs_set(v) 0
 #define standout() 0
 #define standend() 0
+
+/* Colours (EPOC extension; umoria itself is monochrome) */
+enum {
+    EC_BLACK, EC_WHITE, EC_GREY, EC_DARKGREY, EC_RED, EC_ORANGE, EC_YELLOW,
+    EC_GREEN, EC_LIGHTGREEN, EC_BLUE, EC_LIGHTBLUE, EC_UMBER, EC_LIGHTUMBER,
+    EC_VIOLET, EC_PINK, EC_CYAN, EC_MAX
+};
+void epoc_set_attr(int colour);   /* colour for following addch/addstr */
+int  epoc_symbol_colour(char ch, int is_monster, int lit);
 #endif

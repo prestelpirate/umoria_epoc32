@@ -9,6 +9,7 @@ A=$OUT/System/Apps/Umoria
 rm -rf "$OUT" && mkdir -p "$A/data"
 cp $REL/umoria.exe "$A/"
 cp "$HERE/launcher/umoria.app" "$HERE/launcher/umoria.rsc" "$A/"
+cp "$HERE/icon/umoria.aif" "$A/"
 for f in "$HERE"/data/*; do
   b=$(basename "$f")
   case "$b" in

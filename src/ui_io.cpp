@@ -203,6 +203,16 @@ void panelMoveCursor(Coord_t coord) {
 // Outputs a char to a given interpolated y, x position -RAK-
 // sign bit of a character used to indicate standout mode. -CJS
 void panelPutTile(char ch, Coord_t coord) {
+#ifdef __EPOC32__
+    // Colour by what is on the tile (EPOC port; the original is monochrome)
+    {
+        Tile_t const &tile = dg.floor[coord.y][coord.x];
+        bool is_monster = ch != '@' && tile.creature_id > 1 && monsters[tile.creature_id].lit &&
+                          ch == (char) creatures_list[monsters[tile.creature_id].creature_id].sprite;
+        bool lit = tile.permanent_light || tile.temporary_light;
+        epoc_set_attr(epoc_symbol_colour(ch, is_monster ? 1 : 0, lit ? 1 : 0));
+    }
+#endif
     // Real coords convert to screen positions
     coord.y -= dg.panel.row_prt;
     coord.x -= dg.panel.col_prt;
@@ -210,6 +220,9 @@ void panelPutTile(char ch, Coord_t coord) {
     if (mvaddch(coord.y, coord.x, ch) == ERR) {
         abort();
     }
+#ifdef __EPOC32__
+    epoc_set_attr(EC_WHITE);
+#endif
 }
 
 static Coord_t currentCursorPosition() {
