@@ -1,0 +1,30 @@
+// umoria.mmp - Umoria 5.7.15 for EPOC32 (Psion ER5), console-style build
+TARGET		umoria.exe
+TARGETTYPE	exe
+UID		0x01000a00 0x10005a43
+EPOCSTACKSIZE	0x20000
+EPOCHEAPSIZE	0x100000 0x800000
+
+PROJECT		umoria
+SUBPROJECT	src
+SOURCE		character.cpp config.cpp data_creatures.cpp data_player.cpp data_recall.cpp data_store_owners.cpp
+SOURCE		data_stores.cpp data_tables.cpp data_treasure.cpp dice.cpp dungeon.cpp dungeon_generate.cpp
+SOURCE		dungeon_los.cpp game.cpp game_death.cpp game_files.cpp game_objects.cpp game_run.cpp
+SOURCE		game_save.cpp helpers.cpp identification.cpp inventory.cpp mage_spells.cpp main.cpp
+SOURCE		monster.cpp monster_manager.cpp player_bash.cpp player.cpp player_eat.cpp player_magic.cpp
+SOURCE		player_move.cpp player_pray.cpp player_quaff.cpp player_run.cpp player_stats.cpp player_throw.cpp
+SOURCE		player_traps.cpp player_tunnel.cpp recall.cpp rng.cpp scores.cpp scrolls.cpp
+SOURCE		spells.cpp staves.cpp store.cpp store_inventory.cpp treasure.cpp ui.cpp
+SOURCE		ui_inventory.cpp ui_io.cpp wizard.cpp
+
+SUBPROJECT	epoc
+SOURCE		epocwin.cpp epoc_curses.cpp
+
+SUBPROJECT	compat
+SOURCE		compat.c trace.c
+
+USERINCLUDE	\umoria\src \umoria\epoc
+SYSTEMINCLUDE	\umoria\compat \epoc32\include\libc \epoc32\include
+
+LIBRARY		ecrt0.o
+LIBRARY		estlib.lib euser.lib efsrv.lib ws32.lib gdi.lib fbscli.lib

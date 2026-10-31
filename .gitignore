@@ -1,0 +1,8 @@
+dist/
+hostbuild/
+hostobj/
+*.log
+group/*.marm
+group/cxxflags.local.sed
+*.zip
+trace.txt
